@@ -19,11 +19,13 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @OneToMany(mappedBy = "order")
+    /*
+    CascadeType.All 사용시 persist(order) 시 OrderItem들 또한 각자 persist 실행 없이 저장된다
+     */
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private  Delivery delivery;
 
@@ -31,5 +33,19 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //  주문상태 [order, cancel]
+
+    // 연관관게 메소드 // 양방향일 때 사용용
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
 }
