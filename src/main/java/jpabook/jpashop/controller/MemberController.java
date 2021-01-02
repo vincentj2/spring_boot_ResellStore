@@ -4,6 +4,7 @@ import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
     private final MemberService memberService;
     @GetMapping(value = "/members/new")
@@ -26,8 +28,7 @@ public class MemberController {
         if (result.hasErrors()) {
             return "members/createMemberForm";
         }
-        Address address = new Address(form.getCity(), form.getStreet(),
-                form.getZipcode());
+        Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
         Member member = new Member();
         member.setName(form.getName());
         member.setAddress(address);
