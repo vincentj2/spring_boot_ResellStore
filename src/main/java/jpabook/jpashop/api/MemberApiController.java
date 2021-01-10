@@ -60,8 +60,10 @@ public class MemberApiController {
     }
     /**
      * 수정 API
+     * put방식은 전체 업데이트를 사용할때 사용하는것이 맞다
+     * 부분 업데이트의 경우 post 또는 patch 사용
      */
-    @PutMapping("/api/v2/members/{id}")
+    @PostMapping("/api/v2/members/{id}")
     public UpdateMemberResponse ipdateMemberV2(@PathVariable("id") Long id,
                                                @RequestBody @Valid UpdateMemberRequest request){
         memberService.update(id, request.getName());
