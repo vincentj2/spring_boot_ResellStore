@@ -25,6 +25,7 @@ dependencies {
 
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6")
 	implementation 'org.hibernate.validator:hibernate-validator:6.1.2.Final'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
 
 	implementation 'junit:junit:4.12'
 	compileOnly 'org.projectlombok:lombok'
