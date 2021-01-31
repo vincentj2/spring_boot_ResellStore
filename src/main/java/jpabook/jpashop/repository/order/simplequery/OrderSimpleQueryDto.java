@@ -8,7 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class OrderSimpleQueryDto {
+public class  OrderSimpleQueryDto {
     private Long orderId;
     private String name;
     private LocalDateTime orderDate;
