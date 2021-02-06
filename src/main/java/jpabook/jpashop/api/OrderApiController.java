@@ -93,17 +93,28 @@ public class OrderApiController {
 
         return result;
     }
-
+    /*
+    * V4. JPA에서 DTO로 바로 조회, 컬렉션 N 조회 (1 + N Query)
+    * - 페이징 가능
+   */
     @GetMapping("/api/v4/orders")
     public List<OrderQueryDto> ordersV4(){
         return orderQueryRepository.findOrderQueryDtos();
     }
 
+    /*
+     * V5. JPA에서 DTO로 바로 조회, 컬렉션 1 조회 최적화 버전 (1 + 1 Query)
+     * - 페이징 가능
+     */
     @GetMapping("/api/v5/orders")
     public List<OrderQueryDto> ordersV5(){
         return orderQueryRepository.findAllByDto_optimization();
     }
 
+    /*
+     * V6. JPA에서 DTO로 바로 조회, 플랫 데이터(1Query) (1 Query)
+     * - 페이징 불가능
+     */
     @GetMapping("/api/v6/orders")
     public List<OrderQueryDto> ordersV6(){
         List<OrderFlatDto> flats = orderQueryRepository.findAllByDto_flat();
