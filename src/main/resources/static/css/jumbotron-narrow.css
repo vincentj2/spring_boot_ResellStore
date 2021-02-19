@@ -39,10 +39,15 @@ body {
 .jumbotron {
     text-align: center;
     background-image: url("../img/shoes.jpg");
-  /*  background-size: cover;
-    color: cadetblue;*/
+    background-size: cover;
+    color: firebrick;
+    font-weight: 300;
 }
-
+.sub-title{
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: black;
+}
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
