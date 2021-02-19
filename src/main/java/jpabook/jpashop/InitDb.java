@@ -1,7 +1,7 @@
 package jpabook.jpashop;
 
 import jpabook.jpashop.domain.*;
-import jpabook.jpashop.domain.item.Book;
+import jpabook.jpashop.domain.item.Shoes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +32,12 @@ public class InitDb {
             Member member = createMember("userA", "서울", "1","1111");
             em.persist(member);
 
-            Book book1 = createBook("JPA1 BOOK", 10000, 100);
-            em.persist(book1);
-            Book book2 = createBook("JPA2 BOOK", 20000, 100);
-            em.persist(book2);
-            OrderItem orderItem1 = OrderItem.createOrderItem(book1, 10000, 1);
-            OrderItem orderItem2 = OrderItem.createOrderItem(book2, 20000, 2);
+            Shoes shoes1 = createShoes("나이키 오프화이트", 1000000, 2);
+            em.persist(shoes1);
+            Shoes shoes2 = createShoes("나이키 디올 조던", 3000000, 10);
+            em.persist(shoes2);
+            OrderItem orderItem1 = OrderItem.createOrderItem(shoes1, 1000000, 1);
+            OrderItem orderItem2 = OrderItem.createOrderItem(shoes2, 3000000, 2);
             Order order = Order.createOrder(member, createDelivery(member),
                     orderItem1, orderItem2);
             em.persist(order);
@@ -48,12 +48,12 @@ public class InitDb {
             Member member = createMember("userB", "부산", "2","2222");
             em.persist(member);
 
-            Book book1 = createBook("SPRING1 BOOK", 20000, 200);
-            em.persist(book1);
-            Book book2 = createBook("SPRING2 BOOK", 40000, 300);
-            em.persist(book2);
-            OrderItem orderItem1 = OrderItem.createOrderItem(book1, 20000, 3);
-            OrderItem orderItem2 = OrderItem.createOrderItem(book2, 40000, 4);
+            Shoes shoes1 = createShoes("컨버스 런스타 하이크", 600000, 15);
+            em.persist(shoes1);
+            Shoes shoes2 = createShoes("나이키 사카이", 700000, 10);
+            em.persist(shoes2);
+            OrderItem orderItem1 = OrderItem.createOrderItem(shoes1, 600000, 3);
+            OrderItem orderItem2 = OrderItem.createOrderItem(shoes2, 700000, 4);
             Order order = Order.createOrder(member, createDelivery(member),
                     orderItem1, orderItem2);
             em.persist(order);
@@ -66,12 +66,12 @@ public class InitDb {
             member.setAddress(new Address(city, street, zipcode));
             return member;
         }
-        private Book createBook(String name, int price, int stockQuantity) {
-            Book book = new Book();
-            book.setName(name);
-            book.setPrice(price);
-            book.setStockQuantity(stockQuantity);
-            return book;
+        private Shoes createShoes(String name, int price, int stockQuantity) {
+            Shoes shoe = new Shoes();
+            shoe.setName(name);
+            shoe.setPrice(price);
+            shoe.setStockQuantity(stockQuantity);
+            return shoe;
         }
         private Delivery createDelivery(Member member) {
             Delivery delivery = new Delivery();

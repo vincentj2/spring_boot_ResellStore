@@ -1,7 +1,7 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.domain.item.Shoes;
 import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,21 +22,21 @@ public class ItemController {
     @GetMapping("/items/new")
     public String createForm(Model model){
 
-        model.addAttribute("form", new BookForm());
+        model.addAttribute("form", new ShoesForm());
         return "items/createItemForm";
     }
 
     @PostMapping("/items/new")
-    public String create(BookForm form){
+    public String create(ShoesForm form){
 
-        Book book = new Book();
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        Shoes Shoe = new Shoes();
+        Shoe.setName(form.getName());
+        Shoe.setPrice(form.getPrice());
+        Shoe.setStockQuantity(form.getStockQuantity());
+        Shoe.setBrand(form.getBrand());
+        Shoe.setCollaboration(form.getCollaboration());
 
-        itemService.saveItem(book);
+        itemService.saveItem(Shoe);
         return "redirect:/items";
 
     }
@@ -53,14 +53,14 @@ public class ItemController {
 
     @GetMapping(value = "/items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model){
-        Book item = (Book)itemService.findOne(itemId);
-        BookForm form = new BookForm();
+        Shoes item = (Shoes)itemService.findOne(itemId);
+        ShoesForm form = new ShoesForm();
         form.setId(item.getId());
         form.setName(item.getName());
         form.setPrice(item.getPrice());
         form.setStockQuantity(item.getStockQuantity());
-        form.setAuthor(item.getAuthor());
-        form.setIsbn(item.getIsbn());
+        form.setBrand(item.getBrand());
+        form.setCollaboration(item.getCollaboration());
         model.addAttribute("form", form);
         return "items/updateItemForm";
     }
@@ -84,7 +84,7 @@ public class ItemController {
     상품 수정 개선
      */
     @PostMapping(value = "items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form){
+    public String updateItem(@ModelAttribute("form") ShoesForm form){
         itemService.updateItem(form.getId(), form.getName(), form.getPrice());
         return "redirect:/items";
     }
