@@ -5,4 +5,4 @@
 
 
 
-![](image/ResellStore.jpg)
+![](./image/ResellStore.JPG)
